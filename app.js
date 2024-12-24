@@ -2,11 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+require('dotenv').config({ path: './config/.env.local' });
 const articles = require('./routes/article');
-require('custom-env').env(process.env.NODE_ENV, './config');
-mongoose.connect(process.env.CONNECTION_STRING,
-{ useNewUrlParser: true,
-useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URI);
 var app = express();
 app.use(cors());
 app.use(bodyParser.urlencoded({extended : true}));
